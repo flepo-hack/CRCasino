@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<title>CRCasino - Wheel</title>
+	<link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+	<div class="container">
+	  <h2>Wheel of Fortune</h2>
+	  <p>Balance: <span id="balance"></span> Tokens</p>
+	  <button class="btn" onclick="spin()">Spin (Cost: 5 Tokens)</button>
+	  <p id="result"></p>
+	  <a href="casino.html" class="btn small">Back to Casino</a>
+	</div>
+
+<script>
+    function getTokens() {
+      return parseInt(localStorage.getItem("crcasino_tokens") || "0");
+    }
+
+    function setTokens(amount) {
+      localStorage.setItem("crcasino_tokens", amount);
+    }
+
+    function updateBalance() {
+      document.getElementById("balance").textContent = getTokens();
+    }
+
+    function spin() {
+      let tokens = getTokens();
+      if (tokens < 5) {
+        alert("Not enough tokens!");
+        return;
+      }
+
+      tokens -= 5;
+      const outcomes = [-5, 0, 5, 10, 20, 50];
+      const result = outcomes[Math.floor(Math.random() * outcomes.length)];
+      tokens += result;
+      setTokens(tokens);
+
+      let text = result > 0
+        ? `You WON ${result} tokens!`
+        : result === 0
+        ? `Nothing this time...`
+        : `You lost ${Math.abs(result)} more tokens!`;
+
+      document.getElementById("result").textContent = text;
+      updateBalance();
+    }
+
+    updateBalance();
+</script>
+  </body>
+</html>
