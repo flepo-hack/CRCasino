@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<title>CRCasino - Casino Lobby</title>
+	<link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+	<div class="container">
+	  <h1>Welcome, <span id="userName"></span></h1>
+	  <p>You have <span id="tokenCount"></span> Realm Tokens</p>
+	  <h2>Choose Your Game</h2>
+	  <div class="game-menu">
+		<a href="wheel.html" class="btn">Wheel of Fortune</a>
+		<a href="slot.html" class="btn">Slot Machine</a>
+		<a href="tower.html" class="btn">Crystal Tower</a>
+	  </div>
+	  <div class="bottom">
+		<button class="btn small" onclick="resetTokens()">Withdraw Tokens</button>
+		<p class="info-text">You can request tokens again from the bot.</p>
+	  </div>
+	</div>
+
+<script>
+    const user = localStorage.getItem("crcasino_user") || "Guest";
+    const tokens = parseInt(localStorage.getItem("crcasino_tokens") || "0");
+
+    document.getElementById("userName").textContent = user;
+    document.getElementById("tokenCount").textContent = tokens;
+
+    function resetTokens() {
+      if (confirm("Withdraw all tokens and return to login?")) {
+        localStorage.removeItem("crcasino_tokens");
+        window.location.href = "index.html";
+      }
+    }
+</script>
+  </body>
+</html>
