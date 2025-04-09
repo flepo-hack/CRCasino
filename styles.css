@@ -1,0 +1,63 @@
+/* style.css */
+body {
+  margin: 0;
+  padding: 0;
+  background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaD8iOrkMHW8HQEvVG-WCYUPp9HBteIZ16Nw&s');
+  background-size: cover; /* Täyttää koko näytön */
+  background-position: center; /* Keskittää taustakuvan */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  background-color: rgba(0, 0, 0, 0.7); /* Musta läpinäkyvä tausta */
+  padding: 30px;
+  border-radius: 15px;
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 0 20px #00ffcc33;
+}
+
+input, button, .btn {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 7px;
+  border: none;
+  font-size: 1em;
+}
+
+.btn {
+  background-color: #00ffcc;
+  color: black;
+  font-weight: bold;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn:hover {
+  background-color: #00ddaa;
+  cursor: pointer;
+}
+
+.small {
+  font-size: 0.9em;
+  padding: 8px;
+}
+
+.game-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.info-text {
+  font-size: 0.8em;
+  color: #aaa;
+}
