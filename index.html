@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<title>CRCasino - Login</title>
+	<link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+	<div class="container">
+	  <h2>Welcome to CRCasino</h2>
+	  <div id="step1">
+		<p>1. Login with your Crystal Realms username</p>
+		<input type="text" id="username" placeholder="Username" required />
+		<input type="password" id="password" placeholder="Optional password" />
+		<button class="btn" onclick="login()">Login</button>
+	  </div>
+
+	  <div id="step2" class="hidden">
+		<p>2. Send a bot to trade Realm Tokens</p>
+		<button class="btn" onclick="sendBot()">Send Bot</button>
+	  </div>
+
+	  <div id="step3" class="hidden">
+		<p class="country">Bot sent to country: <span id="countryID"></span></p>
+		<p>You have 2 minutes to do the trade.</p>
+		<input type="number" id="tokenAmount" placeholder="Amount of tokens to request" />
+		<button class="btn" onclick="completeTrade()">Complete Trade</button>
+	  </div>
+	</div>
+
+<script>
+    function login() {
+      const user = document.getElementById('username').value.trim();
+      if (!user) return alert("Please enter a username.");
+      localStorage.setItem("crcasino_user", user);
+      document.getElementById("step1").classList.add("hidden");
+      document.getElementById("step2").classList.remove("hidden");
+    }
+
+    function sendBot() {
+      const country = generateCountryID();
+      localStorage.setItem("crcasino_country", country);
+      document.getElementById("countryID").innerText = country;
+      document.getElementById("step2").classList.add("hidden");
+      document.getElementById("step3").classList.remove("hidden");
+    }
+
+    function completeTrade() {
+      const amount = parseInt(document.getElementById('tokenAmount').value);
+      if (isNaN(amount) || amount <= 0) {
+        return alert("Enter a valid token amount.");
+      }
+
+      const existing = parseInt(localStorage.getItem("crcasino_tokens") || "0");
+      const total = existing + amount;
+      localStorage.setItem("crcasino_tokens", total);
+      alert(`Trade complete! You now have ${total} Realm Tokens.`);
+      window.location.href = "casino.html";
+    }
+
+    function generateCountryID() {
+      const countries = ["FI", "NL", "SE", "DE", "US", "JP", "CA", "NO"];
+      const id = Math.floor(Math.random() * 90 + 10);
+      return countries[Math.floor(Math.random() * countries.length)] + id;
+    }
+</script>
+  </body>
+</html>
